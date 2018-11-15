@@ -18,10 +18,9 @@ public class HomeController {
 	ClientRepository clientRepository;
 	
 	@RequestMapping(value="/")
-	public String index(@RequestParam(value="name", defaultValue="User") String name, Model model) {
+	public String index(Model model) {
 		List<Client> clientList = (List<Client>) clientRepository.findAll();
 		model.addAttribute("clientList", clientList);
-		model.addAttribute("name", name);
 		return "index";
 	}
 

@@ -2,6 +2,7 @@ package co.uk.jasdeepaulakh.bookingsystem.entity;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,13 +21,13 @@ public class Appointment {
 	@Column(name="date_created")
 	private Timestamp dateCreated;
 	
-	@OneToOne
-	@JoinColumn(name="employee_created")
-	private int employeeCreated;
+	@OneToOne(targetEntity = Employee.class, cascade = {CascadeType.ALL})
+	@JoinColumn(name="employee_id")
+	private Employee employee;
 	
-	@OneToOne
+	@OneToOne(targetEntity = Client.class, cascade = {CascadeType.ALL})
 	@JoinColumn(name="client_id")
-	private int clientId;
+	private Client client;
 	
 	@Column(name="start_datetime")
 	private Timestamp startDatetime;
@@ -42,13 +43,17 @@ public class Appointment {
 	
 	@Column(name="cancellation_reason")
 	private String cancellationReason;
+	
+	public Appointment() {
+		
+	}
 
-	public Appointment(Timestamp dateCreated, int employeeCreated, int clientId, Timestamp startDatetime,
+	public Appointment(Timestamp dateCreated, Employee employee, Client client, Timestamp startDatetime,
 			Timestamp endDatetime, double priceFull, boolean cancelled, String cancellationReason) {
 		super();
 		this.dateCreated = dateCreated;
-		this.employeeCreated = employeeCreated;
-		this.clientId = clientId;
+		this.employee = employee;
+		this.client = client;
 		this.startDatetime = startDatetime;
 		this.endDatetime = endDatetime;
 		this.priceFull = priceFull;
@@ -72,20 +77,20 @@ public class Appointment {
 		this.dateCreated = dateCreated;
 	}
 
-	public int getEmployeeCreated() {
-		return employeeCreated;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setEmployeeCreated(int employeeCreated) {
-		this.employeeCreated = employeeCreated;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
-	public int getClientId() {
-		return clientId;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public Timestamp getStartDatetime() {

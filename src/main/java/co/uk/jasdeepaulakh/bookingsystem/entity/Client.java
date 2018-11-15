@@ -1,5 +1,6 @@
 package co.uk.jasdeepaulakh.bookingsystem.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,20 +12,25 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private String client_name;
-	private String client_email;
-	private String client_phone;
 	
+	@Column(name="client_name")
+	private String clientName;
+	
+	@Column(name="client_email")
+	private String clientEmail;
+	
+	@Column(name="client_phone")
+	private String clientPhone;
 	
 	
 	public Client() {
 	}
 
-	public Client(String client_name, String client_email, String client_phone) {
+	public Client(String clientName, String clientEmail, String clientPhone) {
 		super();
-		this.client_name = client_name;
-		this.client_email = client_email;
-		this.client_phone = client_phone;
+		this.clientName = clientName;
+		this.clientEmail = clientEmail;
+		this.clientPhone = clientPhone;
 	}
 
 	public int getId() {
@@ -35,28 +41,28 @@ public class Client {
 		this.id = id;
 	}
 
-	public String getClient_name() {
-		return client_name;
+	public String getClientName() {
+		return clientName;
 	}
 
-	public void setClient_name(String client_name) {
-		this.client_name = client_name;
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
-	public String getClient_email() {
-		return client_email;
+	public String getClientEmail() {
+		return clientEmail;
 	}
 
-	public void setClient_email(String client_email) {
-		this.client_email = client_email;
+	public void setClientEmail(String clientEmail) {
+		this.clientEmail = clientEmail;
 	}
 
-	public String getClient_phone() {
-		return client_phone;
+	public String getClientPhone() {
+		return clientPhone;
 	}
 
-	public void setClient_phone(String client_phone) {
-		this.client_phone = client_phone;
+	public void setClientPhone(String clientPhone) {
+		this.clientPhone = clientPhone;
 	}
 	
 	

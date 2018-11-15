@@ -17,7 +17,7 @@ public class Schedule {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne
+	@OneToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 	
@@ -26,6 +26,10 @@ public class Schedule {
 	
 	@Column(name="end_datetime")
 	private Date endDatetime;
+	
+	public Schedule() {
+		
+	}
 
 	public Schedule(Employee employee, Date startDatetime, Date endDatetime) {
 		super();
