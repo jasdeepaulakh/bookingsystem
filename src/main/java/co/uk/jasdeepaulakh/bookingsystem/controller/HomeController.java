@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.uk.jasdeepaulakh.bookingsystem.entity.Appointment;
 import co.uk.jasdeepaulakh.bookingsystem.entity.Client;
 import co.uk.jasdeepaulakh.bookingsystem.repository.ClientRepository;
 
@@ -20,6 +21,7 @@ public class HomeController {
 	@RequestMapping(value="/")
 	public String index(Model model) {
 		List<Client> clientList = (List<Client>) clientRepository.findAll();
+		model.addAttribute("appointment", new Appointment());
 		model.addAttribute("clientList", clientList);
 		return "index";
 	}

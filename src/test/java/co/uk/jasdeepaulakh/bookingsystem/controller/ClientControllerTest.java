@@ -1,25 +1,41 @@
 package co.uk.jasdeepaulakh.bookingsystem.controller;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class ClientControllerTest {
+import co.uk.jasdeepaulakh.bookingsystem.entity.Client;
+import co.uk.jasdeepaulakh.bookingsystem.repository.ClientRepository;
 
-	final String BASE_URL = "http://localhost:8080/";
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class ClientControllerTest {
+	
+	//https://www.baeldung.com/spring-boot-testing
 	
 	@Autowired
-	HomeController controller;
+	TestEntityManager entityManager;
 	
+	@Autowired
+	ClientRepository clientRepository;
 
 	@Test
-    public void contexLoads() throws Exception {
-        Assert.assertNotNull(controller);
-    }
+	public void givenClient_whenSave_thenGetOk() {
+		Client client = new Client("Jasdeep", "jasdeepaulakh@gmail.com", "01234");
+		entityManager.persist(client);
+		entityManager.flush();
+		
+		Optional<Client> client2 = clientRepository.findById(1);
+		assertEquals("Jasdeep", client2.get().getClientName());
+	}
+
+	
 
 }

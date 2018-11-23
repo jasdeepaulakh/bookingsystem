@@ -1,6 +1,8 @@
 package co.uk.jasdeepaulakh.bookingsystem.entity;
 
+
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Appointment {
@@ -29,11 +33,13 @@ public class Appointment {
 	@JoinColumn(name="client_id")
 	private Client client;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
 	@Column(name="start_datetime")
-	private Timestamp startDatetime;
+	private Date startDatetime;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
 	@Column(name="end_datetime")
-	private Timestamp endDatetime;
+	private Date endDatetime;
 	
 	@Column(name="price_full")
 	private double priceFull;
@@ -48,8 +54,8 @@ public class Appointment {
 		
 	}
 
-	public Appointment(Timestamp dateCreated, Employee employee, Client client, Timestamp startDatetime,
-			Timestamp endDatetime, double priceFull, boolean cancelled, String cancellationReason) {
+	public Appointment(Timestamp dateCreated, Employee employee, Client client, Date startDatetime,
+			Date endDatetime, double priceFull, boolean cancelled, String cancellationReason) {
 		super();
 		this.dateCreated = dateCreated;
 		this.employee = employee;
@@ -93,19 +99,19 @@ public class Appointment {
 		this.client = client;
 	}
 
-	public Timestamp getStartDatetime() {
+	public Date getStartDatetime() {
 		return startDatetime;
 	}
 
-	public void setStartDatetime(Timestamp startDatetime) {
+	public void setStartDatetime(Date startDatetime) {
 		this.startDatetime = startDatetime;
 	}
 
-	public Timestamp getEndDatetime() {
+	public Date getEndDatetime() {
 		return endDatetime;
 	}
 
-	public void setEndDatetime(Timestamp endDatetime) {
+	public void setEndDatetime(Date endDatetime) {
 		this.endDatetime = endDatetime;
 	}
 
