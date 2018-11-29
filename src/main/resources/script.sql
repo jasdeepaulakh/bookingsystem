@@ -1,37 +1,40 @@
-CREATE TABLE IF NOT EXISTS employee (
-id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-first_name varchar(255) NOT NULL,
-last_name varchar(255) NOT NULL
-);
+CREATE TABLE `employee` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS client (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    client_name varchar(255) NOT NULL,
-    client_email varchar(255),
-    client_phone varchar(50)
-);
+CREATE TABLE `client` (
+  `id` int(11) NOT NULL,
+  `client_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `client_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `client_phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS schedule (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    employee_id int,
-    start_datetime timestamp,
-    end_datetime timestamp,
-    FOREIGN KEY (employee_id) REFERENCES client(id)
-);
+CREATE TABLE `schedule` (
+  `id` int(11) NOT NULL,
+  `end_datetime` date DEFAULT NULL,
+  `start_datetime` date DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKsodsj8c282vagj766ll9g8tdc` (`employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS appointment (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    date_created TIMESTAMP,
-    employee_created int,
-    client_id int,
-    start_datetime timestamp,
-    end_datetime timestamp,
-    price_full DECIMAL(10,2),
-    cancelled boolean,
-    cancellation_reason VARCHAR,
-    FOREIGN KEY (employee_created) REFERENCES employee(id),
-    FOREIGN KEY (client_id) REFERENCES client(id)
-);
-
-INSERT INTO client(client_name, client_email, client_phone) VALUES ('Jasdeep', 'jasdeepaulakh@gmail.com', '123');
-INSERT INTO employee(first_name, last_name) VALUES ('John', 'Smith');
+CREATE TABLE `appointment` (
+  `id` int(11) NOT NULL,
+  `cancellation_reason` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cancelled` bit(1) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `end_datetime` datetime DEFAULT NULL,
+  `price_full` double DEFAULT NULL,
+  `start_datetime` datetime DEFAULT NULL,
+  `client_id` int(11) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `client_id` (`client_id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`),
+  CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

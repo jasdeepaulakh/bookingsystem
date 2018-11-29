@@ -25,5 +25,12 @@ public class HomeController {
 		model.addAttribute("clientList", clientList);
 		return "index";
 	}
+	
+	@RequestMapping(value="/clients")
+	public String clientList(Model model) {
+		List<Client> clientList = (List<Client>) clientRepository.findAll();
+		model.addAttribute("clientList", clientList);
+		return "admin/clients";
+	}
 
 }

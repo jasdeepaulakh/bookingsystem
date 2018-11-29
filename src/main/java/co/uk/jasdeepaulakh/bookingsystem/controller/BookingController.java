@@ -1,23 +1,14 @@
 package co.uk.jasdeepaulakh.bookingsystem.controller;
 
-import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import co.uk.jasdeepaulakh.bookingsystem.entity.Appointment;
-import co.uk.jasdeepaulakh.bookingsystem.entity.Client;
-import co.uk.jasdeepaulakh.bookingsystem.entity.Employee;
 import co.uk.jasdeepaulakh.bookingsystem.repository.AppointmentRepository;
 import co.uk.jasdeepaulakh.bookingsystem.repository.ClientRepository;
 import co.uk.jasdeepaulakh.bookingsystem.repository.EmployeeRepository;
